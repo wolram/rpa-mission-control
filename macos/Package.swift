@@ -1,20 +1,20 @@
-// swift-tools-version: 6.3
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version: 5.9
 import PackageDescription
 
 let package = Package(
     name: "macos",
+    platforms: [
+        .macOS(.v14) // Forçando macOS 14 (Sonoma) para suportar NavigationSplitView e APIs modernas
+    ],
+    products: [
+        .executable(name: "MissionControl", targets: ["MissionControl"]),
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .executableTarget(
-            name: "macos"
-        ),
+            name: "MissionControl",
+            dependencies: []),
         .testTarget(
             name: "macosTests",
-            dependencies: ["macos"]
-        ),
-    ],
-    swiftLanguageModes: [.v6]
+            dependencies: ["MissionControl"]),
+    ]
 )
